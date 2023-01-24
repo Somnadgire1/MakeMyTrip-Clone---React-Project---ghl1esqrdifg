@@ -1,15 +1,17 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../firebase';
 
 
 export default function Signup() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const signup = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, name, email, password)
     .then((user) => {
       console.log(user);
     })
@@ -25,7 +27,7 @@ export default function Signup() {
       <form onSubmit={signup}>
         <div className='form-group p-2'>
             <label htmlFor='name'>Name :</label>
-            <input className="form-control" type='text' placeholder='Name'/>
+            <input className="form-control" type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='Name'/>
         </div>
         <div className='form-group p-2'>
             <label htmlFor='email'>Email :</label>

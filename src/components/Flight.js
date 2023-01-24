@@ -53,12 +53,12 @@ export default function FlightSearch() {
       );
       setData(toResult);
 
-    const ddResult = searchApiData.filter((item) =>
+    const ddResult = toResult.filter((item) =>
         item.departure.departureDate.toLowerCase().includes(filterdd.toLowerCase())
       );
       setData(ddResult);
 
-      const rdResult = searchApiData.filter((item) =>
+      const rdResult = ddResult.filter((item) =>
         item.return.returnDate.toLowerCase().includes(filterRd.toLowerCase())
       );
       setData(rdResult);
