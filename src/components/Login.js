@@ -21,7 +21,7 @@ export default function Login() {
       <div className='d-flex aligns-items-center justify-content-center'>
         <div className='container card p-3 mt-2 w-50'>
       <h1 className='text-center bg-danger text-white p-2 mb-2'>Login Page</h1>
-      {/* <p className='fs-5 text-center text-info'><br/><span className='fs-4 text-center text-success'>Your Registration Successfull!!!</span><br/><span className='text-warning'>Please Log In</span></p> */}
+      {/* <p className='fs-5 text-center text-info'><br/><span className='fs-4 text-center text-success'>Your Registration Successful !!!</span><br/><span className='text-warning'>Please Log In</span></p> */}
       <form onSubmit={Login}>
         <div className='form-group p-2'>
             <label htmlFor='email'>Email :</label>

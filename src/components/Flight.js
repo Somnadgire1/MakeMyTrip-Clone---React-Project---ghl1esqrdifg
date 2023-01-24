@@ -20,54 +20,49 @@ export default function FlightSearch() {
     };
     fetchData();
   }, []);
+
   //from city
   const handlefilterfrom = (frm) => {
-    if (frm.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const fromResult = searchApiData.filter((item) =>
-        item.from.toLowerCase().includes(frm.target.value.toLowerCase())
-      );
-      setData(fromResult);
-    }
     setFilterFrom(frm.target.value);
   };
+
   // To city
   const handlefilterTo = (to) => {
-    if (to.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const toResult = searchApiData.filter((item) =>
-        item.to.toLowerCase().includes(to.target.value.toLowerCase())
-      );
-      setData(toResult);
-    }
     setFilterTo(to.target.value);
   };
+
   //Departure Date
   const handlefilterDepartureDate = (dd) => {
-    if (dd.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const ddResult = searchApiData.filter((item) =>
-        item.departure.departureDate.toLowerCase().includes(dd.target.value.toLowerCase())
-      );
-      setData(ddResult);
-    }
     setFilterDepDate(dd.target.value);
   };
+
   //Return Date
   const handlefilterReturnDate = (rd) => {
-    if (rd.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const rdResult = searchApiData.filter((item) =>
-        item.return.returnDate.toLowerCase().includes(rd.target.value.toLowerCase())
-      );
-      setData(rdResult);
-    }
     setFilterRetDate(rd.target.value);
   };
+
+  // search button
+  const searchHandle =() => {
+    const fromResult = searchApiData.filter((item) =>
+        item.from.toLowerCase().includes(filterFrom.toLowerCase())
+      );
+      setData(fromResult);
+
+      const toResult = fromResult.filter((item) =>
+        item.to.toLowerCase().includes(filterTo.toLowerCase())
+      );
+      setData(toResult);
+
+    const ddResult = searchApiData.filter((item) =>
+        item.departure.departureDate.toLowerCase().includes(filterdd.toLowerCase())
+      );
+      setData(ddResult);
+
+      const rdResult = searchApiData.filter((item) =>
+        item.return.returnDate.toLowerCase().includes(filterRd.toLowerCase())
+      );
+      setData(rdResult);
+  }
 
   return (
     <div>
@@ -108,7 +103,7 @@ export default function FlightSearch() {
             <label htmlFor="date">DEPARTURE</label>
             <input
               className="form-control"
-              type="text"
+              type="date"
               value={filterdd}
               onChange={(dd) => handlefilterDepartureDate(dd)}
               placeholder="mm/dd/yyyy"
@@ -118,7 +113,7 @@ export default function FlightSearch() {
             <label htmlFor="date">RETURN</label>
             <input
               className="form-control"
-              type="text"
+              type="date"
               value={filterRd}
               onChange={(rd) => handlefilterReturnDate(rd)}
               placeholder="mm/dd/yyyy"
@@ -128,7 +123,7 @@ export default function FlightSearch() {
         <div className="text-center ">
           <button
             type="button"
-            className="btn btn-outline-success rounded-pill"
+            className="btn btn-outline-success rounded-pill" onClick={searchHandle}
           >
             Search
           </button>

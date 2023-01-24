@@ -3,11 +3,11 @@ import React from 'react'
 export default function Home() {
   return (
   <div className="row">
-  <div className="col-lg-12 list-group-item-primary img-thumbnail ">
+  <div className="col-lg-12">
       <img
         src="https://content.jdmagicbox.com/comp/hyderabad/v6/040pxx40.xx40.110609181818.j3v6/catalogue/makemytrip-com-branch-office--banjara-hills-hyderabad-travel-agents-rwam4fu901.jpg?clr=2e2e38"
         alt=""
-        className="w-100 h-50"
+        className="w-100 h-50 p-5"
       />
     </div><hr/>
     <div className="col-lg-4">
@@ -24,15 +24,6 @@ export default function Home() {
         className="w-100"
       />
     </div>
-    {/* {/* <div className="col-lg-4">
-      <img
-        src="https://im.rediff.com/getahead/2017/mar/27raigad-fort-shivaji-5.jpg"
-        alt="View of the City in the Mountains"
-        className="w-100"
-      />
-    </div>
-  </div>
-</div> */}
     </div>
   )
 }

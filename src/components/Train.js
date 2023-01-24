@@ -22,53 +22,43 @@ export default function Train() {
   }, []);
   //from city
   const handlefilterfrom = (frm) => {
-    if (frm.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const fromResult = searchApiData.filter((item) =>
-        item.from.toLowerCase().includes(frm.target.value.toLowerCase())
-      );
-      setData(fromResult);
-    }
     setFilterFrom(frm.target.value);
   };
   // To city
   const handlefilterTo = (to) => {
-    if (to.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const toResult = searchApiData.filter((item) =>
-        item.to.toLowerCase().includes(to.target.value.toLowerCase())
-      );
-      setData(toResult);
-    }
     setFilterTo(to.target.value);
   };
   //Travel Date
   const handlefilterTravelDate = (td) => {
-    if (td.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const tdResult = searchApiData.filter((item) =>
-        item.departure.departureDate.toLowerCase().includes(td.target.value.toLowerCase())
-      );
-      setData(tdResult);
-    }
     setFiltertdDate(td.target.value);
   };
   //class - in api not available
   const handlefilterClass = (c) => {
-    if (c.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const classResult = searchApiData.filter((item) =>
-        item.train_number.toLowerCase().includes(c.target.value.toLowerCase())
-      );
-      setData(classResult);
-    }
     setFilterclass(c.target.value);
   };
 
+   // search button
+  const searchHandle =() => {
+      const fromResult = searchApiData.filter((item) =>
+        item.from.toLowerCase().includes(filterFrom.toLowerCase())
+      );
+      setData(fromResult);
+
+      const toResult = searchApiData.filter((item) =>
+        item.to.toLowerCase().includes(filterTo.toLowerCase())
+      );
+      setData(toResult);
+
+      const tdResult = searchApiData.filter((item) =>
+        item.departure.departureDate.toLowerCase().includes(filtertd.toLowerCase())
+      );
+      setData(tdResult);
+
+      const classResult = searchApiData.filter((item) =>
+        item.train_number.toLowerCase().includes(filterclass.toLowerCase())
+      );
+      setData(classResult);
+  }
   return (
     <div>
       <div className="m-3">
@@ -128,7 +118,7 @@ export default function Train() {
         <div className="text-center ">
           <button
             type="button"
-            className="btn btn-outline-success rounded-pill"
+            className="btn btn-outline-success rounded-pill" onClick={searchHandle}
           >
             Search
           </button>

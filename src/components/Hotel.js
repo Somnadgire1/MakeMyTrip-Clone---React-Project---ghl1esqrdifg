@@ -20,54 +20,50 @@ export default function TrainSection() {
     };
     fetchData();
   }, []);
+
   // city
   const handlefilterCity = (city) => {
-    if (city.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const cityResult = searchApiData.filter((item) =>
-        item.city.toLowerCase().includes(city.target.value.toLowerCase())
-      );
-      setData(cityResult);
-    }
     setFiltercity(city.target.value);
   };
+
   // Check-in
   const handlefilterCi = (ci) => {
-    if (ci.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const ciResult = searchApiData.filter((item) =>
-        item.check_in.toLowerCase().includes(ci.target.value.toLowerCase())
-      );
-      setData(ciResult);
-    }
     setFilterci(ci.target.value);
   };
+
   // check-out
   const handlefilterCo = (co) => {
-    if (co.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const coResult = searchApiData.filter((item) =>
-        item.check_out.toLowerCase().includes(co.target.value.toLowerCase())
-      );
-      setData(coResult);
-    }
     setFilterco(co.target.value);
   };
+
   // Guests
   const handlefilterGst = (gst) => {
-    if (gst.target.value === "") {
-      setData(searchApiData);
-    } else {
-      const gstResult = searchApiData.filter((item) =>
-        item.guests.toLowerCase().includes(gst.target.value.toLowerCase())
-      );
-      setData(gstResult);
-    }
     setFiltergst(gst.target.value);
   };
+
+  // search button
+  const searchHandle =() => {
+      const cityResult = searchApiData.filter((item) =>
+        item.city.toLowerCase().includes(filtercity.toLowerCase())
+      );
+      setData(cityResult);
+
+      const ciResult = searchApiData.filter((item) =>
+        item.check_in.toLowerCase().includes(filterci.toLowerCase())
+      );
+      setData(ciResult);
+
+      const coResult = searchApiData.filter((item) =>
+        item.check_out.toLowerCase().includes(filterco.toLowerCase())
+      );
+      setData(coResult);
+
+      const gstResult = searchApiData.filter((item) =>
+        item.guests.toLowerCase().includes(filtergst.toLowerCase())
+      );
+      setData(gstResult);
+
+  }
   return (
     <div>
       <div className="m-3">
@@ -128,7 +124,7 @@ export default function TrainSection() {
         <div className="text-center ">
           <button
             type="button"
-            className="btn btn-outline-success rounded-pill"
+            className="btn btn-outline-success rounded-pill" onClick={searchHandle}
           >
             Search
           </button>
