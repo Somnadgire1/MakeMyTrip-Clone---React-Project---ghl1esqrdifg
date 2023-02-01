@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import '../components/Styles.css';
 
-export default function Train() {
-  const [data, setData] = useState([]);
+export default function Train({data, setData, data2, setData2}) {
+  // const [data, setData] = useState([]);
   const [filterFrom, setFilterFrom] = useState("");
   const [filterTo, setFilterTo] = useState("");
   const [filtertd, setFiltertdDate] = useState("");
@@ -61,9 +62,9 @@ export default function Train() {
   }
   return (
     <div>
-      <div className="m-3">
-        <h2 className="text-center text-danger">Train Section</h2>
-        <hr />
+      <div className="m-3 searchbar">
+        {/* <h2 className="text-center text-danger">Train Section</h2>
+        <hr /> */}
         <div className="p-1 mt-2">
           <label htmlFor="">Trip Type :</label>
           <select className="form-select w-25">
@@ -98,10 +99,9 @@ export default function Train() {
             <label htmlFor="date">TRAVEL DATE</label>
             <input
               className="form-control"
-              type="text"
+              type="date"
               value={filtertd}
               onChange={(td) => handlefilterTravelDate(td)}
-              placeholder="mm/dd/yyyy"
             />
           </div>
           <div className="p-1 m-3">
@@ -126,9 +126,9 @@ export default function Train() {
       </div>
       <div>
         <h3>Available Tickets</h3>
-        {data.map((item) => {
+        {data.map((item, index) => {
           return (
-            <div className="container card p-5">
+            <div className="container card p-5 crd1" key={index} >
               <div className="row">
                 <div className="col">
                   <p>FROM :</p>
@@ -155,7 +155,10 @@ export default function Train() {
               </div>
               <div className="text-end">
                 <Link to="/checkout">
-                  <button type="button" className="btn btn-outline-warning">
+                  <button type="button" className="btn btn-outline-warning" onClick={() => {
+                    localStorage.setItem('hotel-Price', item.price)
+                    setData2(localStorage.getItem('hotel-Price', item.price))
+                  }}>
                     BOOK
                   </button>
                 </Link>
