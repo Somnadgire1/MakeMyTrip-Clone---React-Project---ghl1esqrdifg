@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import '../components/Styles.css';
 
-export default function TrainSection() {
-  const [data, setData] = useState([]);
+export default function TrainSection({data, setData, data2, setData2}) {
+  // const [data, setData] = useState([]);
   const [filtercity, setFiltercity] = useState("");
   const [filterci, setFilterci] = useState("");
   const [filterco, setFilterco] = useState("");
   const [filtergst, setFiltergst] = useState("");
   const [searchApiData, setSearchApiData] = useState([]);
-
+                        console.log(setData2)
   useEffect(() => {
     const fetchData = () => {
       fetch("https://content.newtonschool.co/v1/pr/63b85bcf735f93791e09caf4/hotels")
@@ -66,9 +67,9 @@ export default function TrainSection() {
   }
   return (
     <div>
-      <div className="m-3">
-        <h2 className="text-center text-danger">Hotel Section</h2>
-        <hr />
+      <div className="m-3 searchbar">
+        {/* <h2 className="text-center text-danger">Hotel Section</h2>
+        <hr /> */}
         <div className="p-1 mt-2">
           <label htmlFor="room">Room Type :</label>
           <select className="form-select w-25">
@@ -93,10 +94,9 @@ export default function TrainSection() {
             <label htmlFor="checkin">CHECK-IN</label>
             <input
               className="form-control"
-              type="text"
+              type="date"
               value={filterci}
               onChange={(ci) => handlefilterCi(ci)}
-              placeholder="Enter City"
               required
             />
           </div>
@@ -104,10 +104,9 @@ export default function TrainSection() {
             <label htmlFor="checkout">CHECK-OUT</label>
             <input
               className="form-control"
-              type="text"
+              type="date"
               value={filterco}
               onChange={(co) => handlefilterCo(co)}
-              placeholder="mm/dd/yyyy"
             />
           </div>
           <div className="p-1 m-3">
@@ -132,9 +131,9 @@ export default function TrainSection() {
       </div>
       <div>
         <h3>Available Hotels</h3>
-        {data.map((item) => {
+        {data.map((item, index) => {
           return (
-            <div className="container card p-5">
+            <div className="container card p-5 crd1" key={index}>
               <div className="row">
                 <div className="col">
                   <p>HOTEL :</p>
@@ -161,7 +160,10 @@ export default function TrainSection() {
               </div>
               <div className="text-end">
                 <Link to="/checkout">
-                  <button type="button" className="btn btn-outline-warning">
+                  <button type="button" className="btn btn-outline-warning" onClick={() => {
+                    localStorage.setItem('hotel-Price', item.price_per_night)
+                    setData2(localStorage.getItem('hotel-Price', item.price_per_night))
+                  }}>
                     BOOK
                   </button>
                 </Link>
