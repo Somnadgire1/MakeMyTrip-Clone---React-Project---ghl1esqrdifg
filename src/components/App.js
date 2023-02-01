@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Flight from './Flight';
 import Hotel from './Hotel';
 import Train from './Train';
@@ -8,23 +8,26 @@ import Checkout from './Checkout';
 import Login from './Login';
 import Signup from './Signup';
 import Header from './Header';
-import Home from './Home';
+// import Home from './Home';
 
  function App() {
+  const [data, setData] = useState([]);
+  const [data2, setData2] = useState([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className='App'>
-      <BrowserRouter>
-      <Header/>
+      <Header email={email} password={password} />
       <Routes>
-        <Route path='/' element={ <Home/> } />
-        <Route path='/flight' element={ <Flight/> } />
-        <Route path='/hotel' element={ <Hotel/> } />
-        <Route path='/train' element={ <Train/> } />
-        <Route path='checkout' element={ <Checkout/> } />
-        <Route path='/login' element={ <Login/> } />
+        {/* <Route path='/' element={ <Home/> } /> */}
+        <Route path='/' element={ <Flight data={data} setData={setData} data2={data2} setData2={setData2}/> } />
+        <Route path='/hotel' element={ <Hotel data={data} setData={setData} data2={data2} setData2={setData2}/> } />
+        <Route path='/train' element={ <Train data={data} setData={setData} data2={data2} setData2={setData2}/> } />
+        <Route path='checkout' element={ <Checkout data={data} setData={setData} data2={data2} setData2={setData2}/> } />
+        <Route path='/login' element={ <Login email={email} setEmail={setEmail} password={password} setPassword={setPassword}/> } />
         <Route path='/login/signup' element={ <Signup/> } />
       </Routes>
-      </BrowserRouter>
     </div>
   );
 }
