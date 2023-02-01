@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import '../components/Styles.css';
 
-export default function FlightSearch() {
-  const [data, setData] = useState([]);
+export default function FlightSearch({data, setData, data2, setData2}) {
+  
   const [filterFrom, setFilterFrom] = useState("");
   const [filterTo, setFilterTo] = useState("");
   const [filterdd, setFilterDepDate] = useState("");
@@ -14,8 +15,8 @@ export default function FlightSearch() {
       fetch("https://content.newtonschool.co/v1/pr/63b85b1209f0a79e89e17e3a/flights")
         .then((response) => response.json())
         .then((json) => {
-          setData(json);
-          setSearchApiData(json);
+          setData(json); //for get card-data
+          setSearchApiData(json); //for search filter
         });
     };
     fetchData();
@@ -43,6 +44,7 @@ export default function FlightSearch() {
 
   // search button
   const searchHandle =() => {
+    // console.log(searchApiData)
     const fromResult = searchApiData.filter((item) =>
         item.from.toLowerCase().includes(filterFrom.toLowerCase())
       );
@@ -63,12 +65,15 @@ export default function FlightSearch() {
       );
       setData(rdResult);
   }
-
+  // const onBookTicket = () => {
+  //   setData2( localStorage.getItem('Ticket-Price', data.map((item) => item.price)))
+  // }
+  // localStorage.setItem('Tickets-Price', data.map((item) => item.price))
   return (
     <div>
-      <div className="m-3">
-        <h2 className="text-center text-danger">Flight Section</h2>
-        <hr />
+      <div className="m-3 searchbar">
+        {/* <h2 className="text-center text-danger">Flight Section</h2>
+        <hr /> */}
         <div className="p-1 mt-2">
           <label htmlFor="">Trip Type :</label>
           <select className="form-select w-25">
@@ -106,7 +111,6 @@ export default function FlightSearch() {
               type="date"
               value={filterdd}
               onChange={(dd) => handlefilterDepartureDate(dd)}
-              placeholder="mm/dd/yyyy"
             />
           </div>
           <div className="p-1 m-3">
@@ -116,7 +120,6 @@ export default function FlightSearch() {
               type="date"
               value={filterRd}
               onChange={(rd) => handlefilterReturnDate(rd)}
-              placeholder="mm/dd/yyyy"
             />
           </div>
         </div>
@@ -131,9 +134,9 @@ export default function FlightSearch() {
       </div>
       <div>
         <h3>Available Tickets</h3>
-        {data.map((item) => {
+        {data.map((item, index) => {
           return (
-            <div className="container card p-5">
+            <div className="container card p-5 crd1" key={index}>
               <div className="row">
                 <div className="col">
                   <p>FROM :</p>
@@ -160,7 +163,10 @@ export default function FlightSearch() {
               </div>
               <div className="text-end">
                 <Link to="/checkout">
-                  <button type="button" className="btn btn-outline-warning">
+                  <button type="button" className="btn btn-outline-warning" onClick={() => {
+                    localStorage.setItem('flight-Price', item.price)
+                    setData2( localStorage.getItem('flight-Price', item.price))
+                  }}>
                     BOOK
                   </button>
                 </Link>
