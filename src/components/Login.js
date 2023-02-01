@@ -3,22 +3,22 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import { auth } from '../firebase';
 
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+export default function Login({email, setEmail, password, setPassword}) {
+  //state hide and show
   const handlelogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
+      //form tag me class hide and show css **
     })
     .catch((error) => {
       error = alert("plz fill correct data")
       console.log(error);
     });
   };
+
   return (
     <div>
       <div className='d-flex aligns-items-center justify-content-center'>
